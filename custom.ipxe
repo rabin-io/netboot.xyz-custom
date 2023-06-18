@@ -4,9 +4,6 @@
 ###
 
 :start
-echo Hello world!
-sleep 10
-goto custom_exit
-
-:custom_exit
-exit 0
+initrd --name initrd http://api.openshift.com/api/assisted-images/images/74b3b5a0-43d0-4b23-a35d-1516a3111a1c/pxe-initrd?arch=x86_64&version=4.13
+kernel http://api.openshift.com/api/assisted-images/boot-artifacts/kernel?arch=x86_64&version=4.13 initrd=initrd coreos.live.rootfs_url=http://api.openshift.com/api/assisted-images/boot-artifacts/rootfs?arch=x86_64&version=4.13 random.trust_cpu=on rd.luks.options=discard ignition.firstboot ignition.platform.id=metal console=tty1 console=ttyS1,115200n8 coreos.inst.persistent-kargs="console=tty1 console=ttyS1,115200n8"
+boot
